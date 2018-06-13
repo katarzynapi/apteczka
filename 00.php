@@ -27,6 +27,9 @@ if(isset($_GET['mn'])){
 	if($_GET['mn'] > 0) echo '<div class="container" style="text-align: center"><H2 style="margin-top: 30px">' . $Naglowki[$wybor][2] . "</H2></div>";
 }
 
+if(isset($_GET['mm'])){
+	$wyborZarzadzanie = $_GET['mm'];
+}
 // Potrzebne funkcje
 $inc = "./inc/funkcje.php";
 if(file_exists($inc)) include($inc);
@@ -116,6 +119,32 @@ switch($wybor){
 		echo "zBazyId: " . $zBazyId . " ";
 	}
 	break;
+	case 6:
+		$_SESSION['Error'] = "";
+		$_SESSION['Etap'] = "Zarzadzaj";
+		if(!isset($_SESSION['user'])){
+			echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
+			if($_SESSION['Error'] != ""){
+				echo "<br>" . $_SESSION['Error'] . "<br>";
+			}
+		} else {
+			$inc = "./inc/zarzadzanie.php";
+			if(file_exists($inc)) include($inc);
+			else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
+			switch($wyborZarzadzanie){
+				case 1:
+					echo 'Załóż apteczkę';
+				break;
+				case 2:
+					echo 'Dodaj użytkownika';
+				break;
+				case 3:
+					echo 'Uzyskaj dostęp';
+				break;
+				default:
+				break;
+			}
+		}
 		break;
 	default:
 		break;

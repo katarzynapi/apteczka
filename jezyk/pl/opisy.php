@@ -13,11 +13,11 @@ $ktx_wylogowano = "<H5>Wylogowano pomyślnie</H5>";
 $Naglowki = array(
 	array(0, "", "", ""),
 	array(1, "Logowanie", "Logowanie do systemu", ""),
-	array(2, "Wyświetl", "Wyświetlanie zawartości", ""),
+	array(2, "Wybór apteczki", "Wybierz apteczkę", ""),
 	array(3, "Wyszukaj", "Wyszukiwanie zaawansowane", ""),
 	array(4, "Dokumentacja", "Dokumentacja systemu", ""),
 	array(5, "Testy", "Testowanie nowych funkcjonalności", ""),
-	array(6, "Wyloguj", "Testowanie nowych funkcjonalności", "")
+	array(6, "Zarządzanie apteczkami", "", "")
 	);
 // Błędy bazy i aplikacji
 ?>
