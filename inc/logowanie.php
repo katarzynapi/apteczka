@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_SESSION['Etap'] != "StartLogowania"){
 	//header("Location: ./../00.php?mn=-1");
 }

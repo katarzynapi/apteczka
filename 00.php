@@ -21,15 +21,13 @@ $inc = "./inc/menu.php";
 if(file_exists($inc)) include($inc);
 else header("Location: app_error.php?tx_err-$BladIntegralnosciAplikacji&gdzie=$inc");
 
+$wybor = 0;
 // Sprawdzenie wyboru opcji menu
 if(isset($_GET['mn'])){
 	$wybor = $_GET['mn'];
 	if($_GET['mn'] > 0) echo '<div class="container" style="text-align: center"><H2 style="margin-top: 30px">' . $Naglowki[$wybor][2] . "</H2></div>";
 }
 
-if(isset($_GET['mm'])){
-	$wyborZarzadzanie = $_GET['mm'];
-}
 // Potrzebne funkcje
 $inc = "./inc/funkcje.php";
 if(file_exists($inc)) include($inc);
@@ -131,19 +129,6 @@ switch($wybor){
 			$inc = "./inc/zarzadzanie.php";
 			if(file_exists($inc)) include($inc);
 			else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
-			switch($wyborZarzadzanie){
-				case 1:
-					echo 'Załóż apteczkę';
-				break;
-				case 2:
-					echo 'Dodaj użytkownika';
-				break;
-				case 3:
-					echo 'Uzyskaj dostęp';
-				break;
-				default:
-				break;
-			}
 		}
 		break;
 		case 7:

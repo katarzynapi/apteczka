@@ -26,7 +26,7 @@
 				// wyslanie mail potwierdzajacego
 				$confirm_code = rand(1000000,2000000);
 				$kwerenda = "INSERT INTO `test_users`(`id`, `nazwa`, `haslo`, `email`, `confirmed`, `confirm_code`)" . 
-					"VALUES (NULL,'$login','$haslo','$email','0','$confirm_code')";
+					"VALUES (NULL,'$login','$haslo_md5','$email','0','$confirm_code')";
 				$result = Zapytanie($kwerenda);
 				if($result) {
 					/*$message = "

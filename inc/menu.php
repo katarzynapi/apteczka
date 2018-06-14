@@ -18,10 +18,10 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo $PlikGlowny; ?>">Strona główna</a>
+          <a class="nav-link" href="00.php">Strona główna</a>
         </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo $PlikGlowny; ?>?mn=1"><?php echo $Naglowki[1][1]; ?></a>
+        <a class="nav-link" href="00.php?mn=1"><?php echo $Naglowki[1][1]; ?></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="00.php?mn=2"><?php echo $Naglowki[2][1]; ?></a>

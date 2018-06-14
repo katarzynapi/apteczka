@@ -1,7 +1,6 @@
 <!--<form action="<?php //echo $PlikGlowny . "?mn=2"; ?>" method = "POST">
 	<input type="submit" value="Wyświetl moje id">
 </form>-->
-
 <?php
 //nazwa leku, liczba?, cena, data ważności
 	$user = $_SESSION['user'];

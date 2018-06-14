@@ -1,9 +1,30 @@
+<div class="container">
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="00.php?mn=6&mm=1">Dodaj apteczkę</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="00.php?mn=6&mm=2">Dołącz do apteczki</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="00.php?mn=6&mm=3">Dodaj użytkowników apteczki</a>
+  </li>
+</ul>
+</div>
 <?php
-	$user = $_SESSION['user'];
-	echo "<div class=\"container\"><H4>Dodawanie nowej apteczki:</H4></div>";
+$wyborZarzadzanie = 0;
+if(isset($_GET['mm'])){
+	$wyborZarzadzanie = $_GET['mm'];
+}
+switch($wyborZarzadzanie){
+
+	case 1:
+			$user = $_SESSION['user'];
+	echo "<div class=\"container\"><H4 style=\"margin-top: 20px\">Dodawanie nowej apteczki:</H4>";
+	echo "<h6 style=\"margin-bottom: 30px\"><small class=\"text-muted\">Dodając nową apteczkę automatycznie stajesz się jej administratorem.</small></div></h6>";
 	$form = "<div class=\"container\"><form action=\"00.php?mn=6\" method=\"post\">";
 		$form .= "Nazwa apteczki: <input type=\"text\" name=\"nazwaApteczki1\" required> <br>";
-		$form .= "Hasło do apteczki: <input type=\"password\" name=\"hasloApteczki1\" required> <br>";
+		$form .= "Hasło do apteczki: <input style=\"margin-bottom: 10px\" type=\"password\" name=\"hasloApteczki1\" required> <br>";
 		$form .= "<input type=\"submit\" class=\"btn btn-primary\"value=\"Dodaj apteczkę\">";
 		$form .= "</form>";
 	 echo $form;
@@ -35,12 +56,15 @@
 			echo "Do bazy dodano nową apteczkę.";
 		}
 	}
-	
-	echo "<H4 style=\"margin-top: 30px\">Dodawanie nowych użytkowników apteczki (tylko admin):</H4></div>";
+	break;
+	case 2:
+			$user = $_SESSION['user'];
+	echo "<div class=\"container\"><H4 style=\"margin-top: 20px\">Dodawanie nowych użytkowników apteczki:</H4>";
+	echo "<h6 style=\"margin-bottom: 30px\"><small class=\"text-muted\">Funkcja dostępna tylko dla administratora apteczki.</small></div></h6>";
 	$form = "<div class=\"container\"><form action=\"00.php?mn=6\" method=\"post\">";
 		$form .= "Nazwa apteczki: <input type=\"text\" name=\"nazwaApteczki2\" required> <br>";
-		$form .= "Nazwa użytkownika: <input type=\"text\" name=\"nazwaUzytkownika\" required> <br>";
-		$form .= "<input type=\"submit\" class=\"btn btn-primary\"value=\"Dodaj do apteczki\">";
+		$form .= "Nazwa użytkownika: <input style=\"margin-bottom: 10px\" type=\"text\" name=\"nazwaUzytkownika\" required> <br>";
+		$form .= "<input type=\"submit\" class=\"btn btn-primary\"value=\"Dodaj użytkownika\">";
 		$form .= "</form>";
 	 echo $form;
 	 
@@ -85,11 +109,14 @@
 
 		}
 	}
-	
-	echo "<H4 style=\"margin-top: 30px\">Dołączanie do apteczki (wymagane hasło dostępu):</H4></div>";
+	break;
+	case 3:
+			$user = $_SESSION['user'];
+	echo "<div class=\"container\"><H4 style=\"margin-top: 20px\">Dołączanie do apteczki:</H4>";
+	echo "<h6 style=\"margin-bottom: 30px\"><small class=\"text-muted\">Aby uzyskać hasło dostępu do apteczki skontaktuj się z jej administratorem.</small></div></h6>";
 	$form = "<div class=\"container\"><form action=\"00.php?mn=6\" method=\"post\">";
 		$form .= "Nazwa apteczki: <input type=\"text\" name=\"nazwaApteczki3\" required> <br>";
-		$form .= "Hasło: <input type=\"password\" name=\"hasloApteczki2\" required> <br>";
+		$form .= "Hasło do apteczki: <input style=\"margin-bottom: 10px\" type=\"password\" name=\"hasloApteczki2\" required> <br>";
 		$form .= "<input type=\"submit\" class=\"btn btn-primary\"value=\"Dodaj mnie to apteczki\">";
 		$form .= "</form>";
 	 echo $form;
@@ -126,6 +153,11 @@
 			echo "Zostałeś/aś dodany/a do apteczki.";
 		}
 	}
+
+	break;
+	default:
+	break;
+}
 ?>
 
 </div>
