@@ -69,19 +69,20 @@
 			$kwerenda = "SELECT id_uzytkownika FROM Dostep WHERE id_apteczki = '$idApteczki'";
 			$result = Zapytanie($kwerenda);
 			if($idUzytkownika == NULL) echo "Użytkownik, którego chcesz dodać nie istnieje w bazie.";
-			else if($result->num_rows > 0){
+			if($result->num_rows > 0){
 				while($row = $result->fetch_assoc()){
 					 if($row["id_uzytkownika"] == $idAdmin || $row["id_uzytkownika"] == $idUzytkownika){
 						 echo "Podany użytkownik już jest przypisany do wybranej apteczki.";
 						 break;
 					 }
+		 			else{
+		 	 			$kwerenda = "INSERT INTO `kpi`.`Dostep` (`id`, `id_uzytkownika`, `id_apteczki`, `czy_admin`) VALUES (NULL, '$idUzytkownika', '$idApteczki', '0')";
+		 	 			$result = Zapytanie($kwerenda);
+		 				echo "Do apteczki dodano nowego użytkownika.";
+		 			}
 				} 
 			}
-			else{
-	 			$kwerenda = "INSERT INTO `kpi`.`Dostep` (`id`, `id_uzytkownika`, `id_apteczki`, `czy_admin`) VALUES (NULL, '$idUzytkownika', '$idApteczki', '0')";
-	 			$result = Zapytanie($kwerenda);
-				echo "Do apteczki dodano nowego użytkownika.";
-			}
+
 		}
 	}
 	

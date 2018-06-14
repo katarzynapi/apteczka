@@ -17,7 +17,9 @@ $Naglowki = array(
 	array(3, "Wyszukaj", "Wyszukiwanie zaawansowane", ""),
 	array(4, "Dokumentacja", "Dokumentacja systemu", ""),
 	array(5, "Testy", "Testowanie nowych funkcjonalności", ""),
-	array(6, "Zarządzanie apteczkami", "", "")
+	array(6, "Zarządzanie apteczkami", "Zarządzanie apteczkami", ""),
+	array(7, "Rejestracja użytkownika", "Rejestrowanie do systemu apteczek", ""),
+	array(8, "", "Potwierdzenie rejestracji", "")
 	);
 // Błędy bazy i aplikacji
 ?>

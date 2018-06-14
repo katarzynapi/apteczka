@@ -39,6 +39,9 @@
       <li class="nav-item">
         <a class="nav-link" href="00.php?mn=6"><?php echo $Naglowki[6][1]; ?></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="00.php?mn=7"><?php echo $Naglowki[7][1]; ?></a>
+      </li>
     </ul>
   </div>
 </nav>

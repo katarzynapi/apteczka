@@ -146,7 +146,35 @@ switch($wybor){
 			}
 		}
 		break;
-	default:
+		case 7:
+			$_SESSION['Error'] = "";
+			$_SESSION['Etap'] = "Rejestracja";
+			if(!isset($_SESSION['user'])){
+				echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
+				if($_SESSION['Error'] != ""){
+					echo "<br>" . $_SESSION['Error'] . "<br>";
+				}
+			} else {
+				$inc = "./inc/rejestracja.php";
+				if(file_exists($inc)) include($inc);
+				else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
+				}
+		break;
+		case 8:
+			$_SESSION['Error'] = "";
+			$_SESSION['Etap'] = "Emailconfirm";
+			if(!isset($_SESSION['user'])){
+				echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
+				if($_SESSION['Error'] != ""){
+					echo "<br>" . $_SESSION['Error'] . "<br>";
+				}
+			} else {
+				$inc = "./inc/emailconfirm.php";
+				if(file_exists($inc)) include($inc);
+				else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
+				}
+		break;
+		default:
 		break;
 }
 $inc = "stopka.php";

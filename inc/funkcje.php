@@ -14,7 +14,7 @@ function PolaczBaza(){
 		$password = $MyUs[2];
 		$database = $MyUs[3];
 	} else{
-		header("Location: ./app_error.php?tx_err=OtworzPlik&gdzie=$pliktxt");
+		header("Location: ./../app_error.php?tx_err=OtworzPlik&gdzie=$pliktxt");
 	}
 	
 	// Wygenerowanie connection: obiekt conn
