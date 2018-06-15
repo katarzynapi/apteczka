@@ -5,21 +5,36 @@ if($_SESSION['Etap'] != "StartLogowania"){
 $_SESSION['Error'] = "";
 if(isset($_POST['inpLogName'])){
 	// Sprawdzam czy podane konto istnieje
-	$LogName = trim($_POST['inpLogName']);
+	/*$LogName = trim($_POST['inpLogName']);
 	$kwerenda = "SELECT email FROM test_users WHERE email = '$LogName'";
 	$result = Zapytanie($kwerenda);
 	$zBazyName = $result->fetch_object()->email;
 	
 	// Sprawdzam czy hasło poprawne
 	$LogHaslo = md5(trim($_POST['inpLogHaslo']));
-	// $LogHaslo = trim($_POST['inpLogHaslo']);
-	//echo "LogHaslo: " . $LogHaslo . " ";
 	$kwerenda = "SELECT haslo FROM test_users WHERE email = '$LogName'";
 	$result = Zapytanie($kwerenda);
 	$zBazyHaslo = $result->fetch_object()->haslo;
-	//echo "zBazyHaslo: " . $zBazyHaslo . " ";
 	if($LogHaslo == $zBazyHaslo){
 		$_SESSION['user'] = $zBazyName;
+		unset($_SESSION['Etap']);
+	} else{
+		$_SESSION['Error'] = "Błąd danych logowania";
+	}*/
+	$LogName = trim($_POST['inpLogName']);
+	$LogHaslo = md5(trim($_POST['inpLogHaslo']));
+	$kwerenda = "SELECT * FROM test_users WHERE email = '$LogName' OR nazwa = '$LogName'";
+	$result = Zapytanie($kwerenda);
+	$row = $result->fetch_assoc();
+	$zBazyEmail = $row["email"];
+	$zBazyNazwa = $row["nazwa"];
+	$zBazyHaslo = $row["haslo"];
+	$confirmed = $row["confirmed"];
+	
+	// Sprawdzam czy hasło poprawne
+	if($LogHaslo == $zBazyHaslo && $confirmed){
+		$_SESSION['user'] = $zBazyEmail;
+		$_SESSION['nazwa'] = $zBazyNazwa;
 		unset($_SESSION['Etap']);
 	} else{
 		$_SESSION['Error'] = "Błąd danych logowania";
@@ -31,11 +46,12 @@ if(!isset($_SESSION['user'])){
 	}
 ?>
 <div class="container">
+	<h1 class=\"display-4\">Logowanie do systemu</h1><hr class=\"my-4\">
 	<fieldset>
 		<form action="<?php echo $PlikGlowny . "?mn=1"; ?>" method = "POST">
 			<div class="form-group">
-				<label for="exampleInputEmail1">E-mail:</label>
-				<input type="email" name="inpLogName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Wprowadź email" required>
+				<label for="exampleInputEmail1">E-mail lub nazwa użytkownika:</label>
+				<input type="text" name="inpLogName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Wprowadź swój e-mail lub nazwę użytkownika" required>
 			</div>
 		    <div class="form-group">
 		      <label for="exampleInputPassword1">Hasło:</label>

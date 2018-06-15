@@ -25,7 +25,7 @@ $wybor = 0;
 // Sprawdzenie wyboru opcji menu
 if(isset($_GET['mn'])){
 	$wybor = $_GET['mn'];
-	if($_GET['mn'] > 0) echo '<div class="container" style="text-align: center"><H2 style="margin-top: 30px">' . $Naglowki[$wybor][2] . "</H2></div>";
+	if($_GET['mn'] > 0) ;//echo '<div class="container" style="text-align: center"><H2 style="margin-top: 30px">' . $Naglowki[$wybor][2] . "</H2></div>";
 }
 
 // Potrzebne funkcje
@@ -38,7 +38,7 @@ switch($wybor){
 		unset($wybor);
 		session_unset();
 		session_destroy();
-		if(!isset($_SESSION['user'])) echo $ktx_wylogowano;
+		if(!isset($_SESSION['user'])) echo "<div class=\"container\">" . $ktx_wylogowano . "</div>";
 		break;
 	case 1: //logowanie
 		$_SESSION['Error'] = "";
@@ -50,25 +50,16 @@ switch($wybor){
 		break;
 	case 2: //wyświetlanie zawartości
 		$_SESSION['Error'] = "";
-		$_SESSION['Etap'] = "Wyswietlanie";
+		$_SESSION['Etap'] = "wyborApteczki";
 		if(!isset($_SESSION['user'])){
 			echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
 			if($_SESSION['Error'] != ""){
 				echo "<br>" . $_SESSION['Error'] . "<br>";
 			}
 		} else {
-			$inc = "./inc/wyswietlanie.php";
+			$inc = "./inc/wyborApteczki.php";
 			if(file_exists($inc)) include($inc);
 			else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
-			/*$user = $_SESSION['user'];
-			$kwerenda = "SELECT id_ksiazka FROM test_users WHERE email = '$user'";
-			$result = Zapytanie($kwerenda);
-			$zBazyIdKsiazka = $result->fetch_object()->id_ksiazka;
-			echo "zBazyIdKsiazka: " . $zBazyIdKsiazka . " ";
-			$kwerenda = "SELECT * FROM ksiazki WHERE id = '$zBazyIdKsiazka'";
-			$result = Zapytanie($kwerenda);
-			$row = $result->fetch_assoc();
-			echo $row["nazwa"] . " | " . $row["autor"] . " | " . "<br>";*/
 		}
 		break;
 	case 3:
@@ -134,8 +125,8 @@ switch($wybor){
 		case 7:
 			$_SESSION['Error'] = "";
 			$_SESSION['Etap'] = "Rejestracja";
-			if(!isset($_SESSION['user'])){
-				echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
+			if(isset($_SESSION['user'])){
+				echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Już jesteś zalogowany. Rejestracja możliwa tylko dla niezalogowanych użytkowników.</h6></div>";
 				if($_SESSION['Error'] != ""){
 					echo "<br>" . $_SESSION['Error'] . "<br>";
 				}
@@ -160,6 +151,7 @@ switch($wybor){
 				}
 		break;
 		default:
+			echo "<div class=\"container\"><h1 class=\"display-4\">System zarządzania apteczkami</h1><hr class=\"my-4\"></div>";
 		break;
 }
 $inc = "stopka.php";
