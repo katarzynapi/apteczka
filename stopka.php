@@ -2,6 +2,7 @@
 <hr/>
 <div class="container">
 	<?php
+		
 		if(isset($_SESSION['user'])){
 			$uzytkownikEmail = $_SESSION['user'];
 			$uzytkownikNazwa = $_SESSION['nazwa'];

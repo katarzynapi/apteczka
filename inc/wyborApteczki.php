@@ -44,6 +44,7 @@
 	
 	if(isset($_POST['apteczki'])){
 		$row = $_POST['apteczki'];
+		$_SESSION['idWybranaApteczka'] = $apteczki[$row][0];
 		$_SESSION['wybranaApteczka'] = $apteczki[$row][1];
 		$_SESSION['dostep'] = $apteczki[$row][2];
 	}

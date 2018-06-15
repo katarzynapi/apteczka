@@ -94,18 +94,16 @@ switch($wybor){
 		break;
 	case 5:
 	$_SESSION['Error'] = "";
-	$_SESSION['Etap'] = "Testy";
+	$_SESSION['Etap'] = "Leki";
 	if(!isset($_SESSION['user'])){
 		echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
 		if($_SESSION['Error'] != ""){
 			echo "<br>" . $_SESSION['Error'] . "<br>";
 	}
 	} else {
-		$user = $_SESSION['user'];
-		$kwerenda = "SELECT id FROM test_users WHERE email = '$user'";
-		$result = Zapytanie($kwerenda);
-		$zBazyId = $result->fetch_object()->id;
-		echo "zBazyId: " . $zBazyId . " ";
+		$inc = "./inc/leki.php";
+		if(file_exists($inc)) include($inc);
+		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 	}
 	break;
 	case 6:
@@ -139,16 +137,9 @@ switch($wybor){
 		case 8:
 			$_SESSION['Error'] = "";
 			$_SESSION['Etap'] = "Emailconfirm";
-			if(!isset($_SESSION['user'])){
-				echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
-				if($_SESSION['Error'] != ""){
-					echo "<br>" . $_SESSION['Error'] . "<br>";
-				}
-			} else {
-				$inc = "./inc/emailconfirm.php";
-				if(file_exists($inc)) include($inc);
-				else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
-				}
+			$inc = "./inc/emailconfirm.php";
+			if(file_exists($inc)) include($inc);
+			else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
 		default:
 			echo "<div class=\"container\"><h1 class=\"display-4\">System zarządzania apteczkami</h1><hr class=\"my-4\"></div>";

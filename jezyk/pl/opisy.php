@@ -16,7 +16,7 @@ $Naglowki = array(
 	array(2, "Wybór apteczki", "Wybierz apteczkę", ""),
 	array(3, "Wyszukaj", "Wyszukiwanie zaawansowane", ""),
 	array(4, "Dokumentacja", "Dokumentacja systemu", ""),
-	array(5, "Testy", "Testowanie nowych funkcjonalności", ""),
+	array(5, "Leki", "Zarządzanie lekami w apteczce", ""),
 	array(6, "Zarządzanie apteczkami", "Zarządzanie apteczkami", ""),
 	array(7, "Rejestracja użytkownika", "Rejestrowanie do systemu apteczek", ""),
 	array(8, "", "Potwierdzenie rejestracji", "")
