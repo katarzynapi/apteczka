@@ -5,6 +5,7 @@
 		$login = $_POST['login'];
 		$email = $_POST['email'];
 		$haslo = $_POST['haslo'];
+		$potwierdzHaslo = $_POST['potwierdzHaslo'];
 		
 		$haslo_md5 = md5($haslo);
 		
@@ -22,13 +23,19 @@
 			if($total2 > 0) {
 				array_push($text,'Wpisz inny adres e-mail.');
 			}
-			if($total1 == 0 && $total2 == 0) { 
+			if($haslo != $potwierdzHaslo) {
+				array_push($text,'Wpisane hasła nie są identyczne!');
+				$zleHaslo = 1;
+			} 
+			else $zleHaslo = 0;
+			
+			if($total1 == 0 && $total2 == 0 && $zleHaslo == 0) { 
 				// wyslanie mail potwierdzajacego
 				$confirm_code = rand(1000000,2000000);
 				$kwerenda = "INSERT INTO `test_users`(`id`, `nazwa`, `haslo`, `email`, `confirmed`, `confirm_code`)" . 
 					"VALUES (NULL,'$login','$haslo_md5','$email','0','$confirm_code')";
 				$result = Zapytanie($kwerenda);
-				if($result) {
+				if($result > 0) {
 					/*$message = "
 						Potwierdź swój adres e-mail.
 						Kliknij link poniżej, aby dokończyć rejestrację:
@@ -43,7 +50,7 @@
 						
 						Nie odpowiadaj na ten e-mail.
 					";
-					mail("$email","Apteczka - potwierdzenie rejestracji","$message","From: noreply@apteczka.com");
+					//mail("$email","Apteczka - potwierdzenie rejestracji","$message","From: noreply@apteczka.com");
 					array_push($text,'Sprawdź skrzynkę mailową i kliknij w link, aby zakończyć rejestrację.');
 				}
 				else echo "Nie dodano do bazy";
@@ -62,8 +69,7 @@
 ?>
 
 <div class="container">
-	<h1 class="display-3">Rejestracja</h1>
-	<hr class="my-4">
+	<br><h5 class="display-4">Rejestracja</h5><br>
 
 	<form action="00.php?mn=7" method="post">
 		<fieldset>
@@ -78,6 +84,10 @@
 			<div class="form-group">
 			  <label for="haslo">Hasło</label>
 			  <input type="password" class="form-control" id="haslo" name="haslo" placeholder="Wpisz hasło">
+			</div>
+			<div class="form-group">
+			  <label for="potwierdzHaslo">Hasło</label>
+			  <input type="password" class="form-control" id="potwierdzHaslo" name="potwierdzHaslo" placeholder="Potwierdź hasło">
 			</div>
 			<input type="submit" class="btn btn-primary" name="dalej" value="Dalej">
 		</fieldset>

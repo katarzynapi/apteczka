@@ -20,7 +20,7 @@
 			} 
 	}
 	$liczbaApteczek = sizeof($apteczki);
-	$form = "<div class=\"container\"><h1 class=\"display-4\">Wybór apteczki</h1><hr class=\"my-4\">";
+	$form = "<div class=\"container\"><br><h5 class=\"display-4\">Wybór apteczki</h5><br>";
 	$form .= "<form action=\"00.php?mn=2\" method=\"post\">";
 	$form .= "<table class=\"table table-hover\"><thead><tr><th scope=\"col\">Lp</th><th scope=\"col\">Nazwa apteczki</th><th scope=\"col\">Dostęp</th>";
 	$form .= "<th scope=\"col\">Wybór</th></tr></thead>";

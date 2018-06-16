@@ -40,9 +40,17 @@ switch($wybor){
 		session_destroy();
 		if(!isset($_SESSION['user'])) echo "<div class=\"container\">" . $ktx_wylogowano . "</div>";
 		break;
+	case 0:
+		$_SESSION['Error'] = "";
+		$_SESSION['Etap'] = "StartLogowania";
+		//Formularz logowania
+		$inc = "./inc/glowna.php";
+		if(file_exists($inc)) include($inc);
+		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
+		break;	
 	case 1: //logowanie
 		$_SESSION['Error'] = "";
-		$_SESSION['Etap'] = "Start logowania";
+		$_SESSION['Etap'] = "StartLogowania";
 		//Formularz logowania
 		$inc = "./inc/logowanie.php";
 		if(file_exists($inc)) include($inc);

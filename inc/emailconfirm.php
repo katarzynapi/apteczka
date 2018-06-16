@@ -7,9 +7,8 @@
 		
 		$kwerenda = "SELECT * FROM `test_users` WHERE `nazwa`='$login'";
 		$result = Zapytanie($kwerenda);
-		if($result) {
+		if($result->num_rows > 0) {
 			$bcode = $result->fetch_object()->confirm_code;
-			echo $bcode . "<br>";
 			if($code == $bcode) {
 				$kwerenda = "UPDATE `test_users` SET `confirmed`='1', `confirm_code`='0' WHERE `nazwa`='$login'";
 				$result = Zapytanie($kwerenda);

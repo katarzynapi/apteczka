@@ -34,11 +34,11 @@ switch($wyborZarzadzanie){
 		$hasloApteczki = md5(trim($_POST['hasloApteczki1']));
 		$user = $_SESSION['user'];
 		
+		// sprawdzenie, czy nie istnieje juz taka apteczka
 		$kwerenda = "SELECT nazwa FROM apteczki WHERE nazwa = '$nazwaApteczki'";
 		$result = Zapytanie($kwerenda);
-		$nazwaApteczkiTest = $result->fetch_object()->nazwa;
-		if($nazwaApteczkiTest != "") echo "Istnieje apteczka o takiej nazwie";
-		else{
+		if($result->num_rows > 0) echo "Istnieje apteczka o takiej nazwie";
+		else {
 			$kwerenda = "SELECT id FROM test_users WHERE email = '$user'";
 			$result = Zapytanie($kwerenda);
 			$idUser = $result->fetch_object()->id;
@@ -76,50 +76,47 @@ switch($wyborZarzadzanie){
 		$user = $_SESSION['user'];
 		
 		$kwerenda = "SELECT id FROM apteczki WHERE nazwa = '$nazwaApteczki'";
-		$result = Zapytanie($kwerenda);
-		$idApteczki = $result->fetch_object()->id;
+		$result1 = Zapytanie($kwerenda);
+			
+		$kwerenda = "SELECT id FROM test_users WHERE nazwa = '$nazwaUzytkownika' AND confirmed='1'";
+		$result2 = Zapytanie($kwerenda);		
 		
-		$kwerenda = "SELECT id FROM test_users WHERE email = '$user'";
-		$result = Zapytanie($kwerenda);
-		$idAdmin = $result->fetch_object()->id;
-		
-		$kwerenda = "SELECT id FROM test_users WHERE nazwa = '$nazwaUzytkownika'";
-		$result = Zapytanie($kwerenda);
-		$idUzytkownika = $result->fetch_object()->id;
-		
-		$kwerenda = "SELECT confirmed FROM test_users WHERE nazwa = '$nazwaUzytkownika'";
-		$result = Zapytanie($kwerenda);
-		$confirmed = $result->fetch_object()->confirmed;
-		
-		$kwerenda = "SELECT czy_admin FROM Dostep WHERE id_apteczki = '$idApteczki' AND id_uzytkownika = '$idAdmin'";
-		$result = Zapytanie($kwerenda);
-		$czy_admin = $result->fetch_object()->czy_admin;
+		// sprawdzenie czy istnieje taki user i taka apteczka
+		if($result1->num_rows > 0 && $result2->num_rows > 0) {
+			$idApteczki = $result1->fetch_object()->id;
+			$idUzytkownika = $result2->fetch_object()->id;			
+			
+			$kwerenda = "SELECT id FROM test_users WHERE email = '$user'";
+			$result = Zapytanie($kwerenda);
+			$idAdmin = $result->fetch_object()->id;
+							
+			$kwerenda = "SELECT admin_id FROM apteczki WHERE id = '$idApteczki'";
+			$result = Zapytanie($kwerenda);
+			$czyAdmin = $result->fetch_object()->admin_id;
 
-		$kwerenda = "SELECT id_uzytkownika FROM Dostep WHERE id_apteczki = '$idApteczki'";
-		$result = Zapytanie($kwerenda);
-		
-		if($czy_admin == NULL || $czy_admin == 0){
-			echo "Nie możesz dodać użytkownika, ponieważ nie jesteś administratorem wybranej apteczki.";
-			$poprawneDane = false;
+			$kwerenda = "SELECT id_uzytkownika FROM Dostep WHERE id_apteczki = '$idApteczki'";
+			$result = Zapytanie($kwerenda);
+			
+			if($idAdmin != $czyAdmin){
+				echo "Nie możesz dodać użytkownika, ponieważ nie jesteś administratorem wybranej apteczki.";
+				$poprawneDane = false;
+			}
+			else if($result->num_rows > 0){
+					while($row = $result->fetch_assoc()){
+						 if($row["id_uzytkownika"] == $idUzytkownika){
+							echo "Podany użytkownik już jest przypisany do wybranej apteczki.";
+							$poprawneDane = false;
+							break;
+						 }
+					} 
+			}
+			if($poprawneDane){
+				$kwerenda = "INSERT INTO `kpi`.`Dostep` (`id`, `id_uzytkownika`, `id_apteczki`, `czy_admin`) VALUES (NULL, '$idUzytkownika', '$idApteczki', '0')";
+				$result = Zapytanie($kwerenda);
+				echo "Do apteczki dodano nowego użytkownika.";
+			}
 		}
-		else if($idUzytkownika == NULL || !$confirmed){
-			echo "Użytkownik, którego chcesz dodać nie istnieje w bazie.";
-			$poprawneDane = false;
-		}
-		else if($result->num_rows > 0){
-				while($row = $result->fetch_assoc()){
-					 if($row["id_uzytkownika"] == $idUzytkownika){
-						echo "Podany użytkownik już jest przypisany do wybranej apteczki.";
-						$poprawneDane = false;
-						break;
-					 }
-				} 
-		}
-		if($poprawneDane){
- 	 		$kwerenda = "INSERT INTO `kpi`.`Dostep` (`id`, `id_uzytkownika`, `id_apteczki`, `czy_admin`) VALUES (NULL, '$idUzytkownika', '$idApteczki', '0')";
- 	 		$result = Zapytanie($kwerenda);
- 			echo "Do apteczki dodano nowego użytkownika.";
-		}
+		else echo "Podana apteczka bądź użytkownik nie istnieją.";
 	}
 	break;
 	
@@ -142,45 +139,44 @@ switch($wyborZarzadzanie){
 		
 		$kwerenda = "SELECT nazwa FROM apteczki WHERE nazwa = '$nazwaApteczki'";
 		$result = Zapytanie($kwerenda);
-		$nazwaApteczkiTest = $result->fetch_object()->nazwa;
 		
-		$kwerenda = "SELECT haslo FROM apteczki WHERE nazwa = '$nazwaApteczki'";
-		$result = Zapytanie($kwerenda);
-		$hasloApteczkiTest = $result->fetch_object()->haslo;
-		
-		$kwerenda = "SELECT id FROM test_users WHERE email = '$user'";
-		$result = Zapytanie($kwerenda);
-		$idUzytkownika = $result->fetch_object()->id;
-		
-		$kwerenda = "SELECT id FROM apteczki WHERE nazwa = '$nazwaApteczki'";
-		$result = Zapytanie($kwerenda);
-		$idApteczki = $result->fetch_object()->id;
-		
-		$kwerenda = "SELECT id_uzytkownika FROM Dostep WHERE id_apteczki = '$idApteczki'";
-		$result = Zapytanie($kwerenda);
-		
-		if($nazwaApteczkiTest == ""){
-			echo "Nie istnieje apteczka o takiej nazwie lub nieprawidłowe hasło.";
-			$poprawneDane = false;
+		// sprawdzenie, czy apteczka istnieje
+		if($result->num_rows > 0)  {
+			$nazwaApteczkiTest = $result->fetch_object()->nazwa;
+			
+			$kwerenda = "SELECT id, haslo FROM apteczki WHERE nazwa = '$nazwaApteczki'";
+			$result = Zapytanie($kwerenda);
+			$row = $result->fetch_assoc();
+			$idApteczki = $row['id'];
+			$hasloApteczkiTest = $row['haslo'];
+			
+			$kwerenda = "SELECT id FROM test_users WHERE email = '$user'";
+			$result = Zapytanie($kwerenda);
+			$idUzytkownika = $result->fetch_object()->id;
+			
+			$kwerenda = "SELECT id_uzytkownika FROM Dostep WHERE id_apteczki = '$idApteczki'";
+			$result = Zapytanie($kwerenda);
+			
+			if($hasloApteczkiTest != $hasloApteczki){
+				echo "Nie istnieje apteczka o takiej nazwie lub nieprawidłowe hasło.";
+				$poprawneDane = false;
+			}
+			else if($result->num_rows > 0){
+					while($row = $result->fetch_assoc()){
+						 if($row["id_uzytkownika"] == $idUzytkownika){
+							echo "Już jesteś przypisany do wybranej apteczki.";
+							$poprawneDane = false;
+							break;
+						 }
+					} 
+			}
+			if($poprawneDane){
+				$kwerenda = "INSERT INTO `kpi`.`Dostep` (`id`, `id_uzytkownika`, `id_apteczki`, `czy_admin`) VALUES (NULL, '$idUzytkownika', '$idApteczki', '0')";
+				$result = Zapytanie($kwerenda);
+				echo "Zostałeś/aś dodany/a do apteczki.";
+			}
 		}
-		else if($hasloApteczkiTest != $hasloApteczki){
-			echo "Nie istnieje apteczka o takiej nazwie lub nieprawidłowe hasło.";
-			$poprawneDane = false;
-		}
-		else if($result->num_rows > 0){
-				while($row = $result->fetch_assoc()){
-					 if($row["id_uzytkownika"] == $idUzytkownika){
-						echo "Już jesteś przypisany do wybranej apteczki.";
-						$poprawneDane = false;
-						break;
-					 }
-				} 
-		}
-		if($poprawneDane){
-	 		$kwerenda = "INSERT INTO `kpi`.`Dostep` (`id`, `id_uzytkownika`, `id_apteczki`, `czy_admin`) VALUES (NULL, '$idUzytkownika', '$idApteczki', '0')";
-	 		$result = Zapytanie($kwerenda);
-			echo "Zostałeś/aś dodany/a do apteczki.";
-		}
+		else echo "Nie istnieje apteczka o takiej nazwie lub nieprawidłowe hasło.";
 	}
 	break;
 	
