@@ -1,7 +1,8 @@
 	<?php
 		if(isset($_SESSION['wybranaApteczka'])) {
 			// form - wyszukanie leku
-			$form = '<div class="container" style="max-width:50%">';
+			$form = '<br><h5 class="display-4 container">Dodawanie leku</h5><br>';
+				$form .= '<div class="container" style="max-width:50%">';
 				$form .= '<form action="00.php?mn=5&mm=1" method="post"><fieldset>';
 				$form .= '<div class="form-group"><label for="nazwa">Nazwa</label>';
 				$form .= '<input type="text" class="form-control" name="nazwa" id="nazwa" required></div>';
@@ -56,7 +57,7 @@
 						$form .= '<fieldset><div class="form-group"><label for="sztuki">Liczba sztuk</label>';
 						$form .= '<input type="number" class="form-control" name="sztuki" id="sztuki" required></div>';
 						$form .= '<div class="form-group"><label for="cena">Cena</label>';
-						$form .= '<input type="number" class="form-control" name="cena" id="cena"></div>';
+						$form .= '<input type="text" class="form-control" name="cena" id="cena"></div>';
 						$form .= '<div class="form-group"><label for="datawaznosci">Data ważności</label>';
 						$form .= '<input type="date" class="form-control" name="datawaznosci" id="datawaznosci"></div>';
 						$form .= '<input type="submit" class="btn btn-primary" value="Dodaj">';

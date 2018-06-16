@@ -17,6 +17,59 @@ if(!isset($_SESSION['user']))
 
 <?php 
 } 
+else {
+	$dataMiesiacPo = date_create("+1 month")->format('Y-m-d');
+	$emailUser = $_SESSION['user'];
+	$kwerenda = "SELECT id FROM test_users WHERE email = '$emailUser'";
+	$result = Zapytanie($kwerenda);
+	$idUser = $result->fetch_object()->id;
+	
+	$kwerenda = "SELECT `id_apteczki` FROM `Dostep` WHERE `id_uzytkownika`='$idUser' ORDER BY `id_apteczki`";
+	$result = Zapytanie($kwerenda);
+	
+	$form = '<br><h5 class="display-4 container">Leki, które wkrótce ulegną przeterminowaniu</h5><br>';
+		$form .= '<div class="container">';
+		$form .= '<table class="table table-hover"><thead><tr>';
+		$form .= '<th scope="col">Nazwa leku</th>';
+		$form .= '<th scope="col">Opakowanie</th>';
+		$form .= '<th scope="col">Dawka</th>';
+		$form .= '<th scope="col">Ilość</th>';
+		$form .= '<th scope="col">Data ważności</th></tr></thead><tbody>';
+	
+	while($row = $result->fetch_assoc()) {
+		$idApteczki = $row['id_apteczki'];
+		$kwerenda = "SELECT `id_leku`, `data_waznosci`, `pozostalo` FROM `RuchLekow` WHERE `id_apteczki`='$idApteczki' AND `pozostalo`>0 AND `id_dokumentu`='1'";
+		$result2 = Zapytanie($kwerenda);
+		while($row2 = $result2->fetch_assoc()) {
+			$id_leku = $row2['id_leku'];
+			$dataWaznosci = $row2['data_waznosci'];
+			$pozostalo = $row2['pozostalo'];
+			if($dataWaznosci < $dataMiesiacPo) {
+				$kwerenda = "SELECT `NazwaHandlowa`,`Opakowanie`,`Dawka` FROM `ListaLekow` WHERE `id` = '$id_leku'";
+				$result3 = Zapytanie($kwerenda);
+				$row3 = $result3->fetch_assoc();
+				$form .= '<tr class="table-light">';
+					$form .= '<td>' . $row3['NazwaHandlowa'] . '</td>';
+					$form .= '<td>' . $row3['Opakowanie'] . '</td>';
+					$form .= '<td>' . $row3['Dawka'] . '</td>';
+					$form .= '<td>' . $pozostalo . '</td>';
+					$form .= '<td>' . $dataWaznosci . '</td></tr>';
+			}
+		}
+	}
+	
+	$form .= "</tbody></table></div>";
+	echo $form;
+	
+	
+	/*$kwerenda = "SELECT `data_waznosci` FROM `RuchLekow` WHERE `id`='7'";
+	$result = Zapytanie($kwerenda);
+	$dataProba = $result->fetch_object()->data_waznosci;
+	$dataDzis = date("Y-m-d");
+	
+	if($dataDzis < $dataZaMiesiac) echo "prawda";
+	else echo "fałsz";*/
+}
 
 $wyborGlowna = 0;
 if(isset($_GET['ms'])){

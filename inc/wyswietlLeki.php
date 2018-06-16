@@ -1,6 +1,6 @@
  <?php
 	if(isset($_SESSION['wybranaApteczka'])) {
-		
+		echo '<br><h5 class="display-4 container">Aktualna zawartość apteczki</h5><br>';
 		$nazwaApteczki = $_SESSION['wybranaApteczka'];
 		$kwerenda = "SELECT id FROM apteczki WHERE nazwa = '$nazwaApteczki'";
 		$result = Zapytanie($kwerenda);
