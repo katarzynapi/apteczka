@@ -35,11 +35,17 @@ if(isset($_GET['mm'])){
 		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
 	case 2:
+		// wydanie leku
+		$inc = "./inc/wydajLek.php";
+		if(file_exists($inc)) include($inc);
+		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
- 
 	case 3:
+		// utylizacja leku
+		$inc = "./inc/utylizujLek.php";
+		if(file_exists($inc)) include($inc);
+		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
- 
 	default:
 		break;
 }

@@ -34,11 +34,15 @@ else {
 		$form .= '<th scope="col">Opakowanie</th>';
 		$form .= '<th scope="col">Dawka</th>';
 		$form .= '<th scope="col">Ilość</th>';
-		$form .= '<th scope="col">Data ważności</th></tr></thead><tbody>';
+		$form .= '<th scope="col">Data ważności</th>';
+		$form .= '<th scope="col">Nazwa apteczki</th></tr></thead><tbody>';
 	
 	while($row = $result->fetch_assoc()) {
 		$idApteczki = $row['id_apteczki'];
-		$kwerenda = "SELECT `id_leku`, `data_waznosci`, `pozostalo` FROM `RuchLekow` WHERE `id_apteczki`='$idApteczki' AND `pozostalo`>0 AND `id_dokumentu`='1'";
+		$kwerenda = "SELECT nazwa FROM apteczki WHERE id = '$idApteczki'";
+		$result5 = Zapytanie($kwerenda);
+		$nazwaApteczki = $result5->fetch_object() ->nazwa;
+		$kwerenda = "SELECT `id_leku`, `data_waznosci`, `pozostalo` FROM `RuchLekow` WHERE `id_apteczki`='$idApteczki' AND `pozostalo`>0 AND `id_dokumentu`='1' ORDER BY data_waznosci";
 		$result2 = Zapytanie($kwerenda);
 		while($row2 = $result2->fetch_assoc()) {
 			$id_leku = $row2['id_leku'];
@@ -53,7 +57,8 @@ else {
 					$form .= '<td>' . $row3['Opakowanie'] . '</td>';
 					$form .= '<td>' . $row3['Dawka'] . '</td>';
 					$form .= '<td>' . $pozostalo . '</td>';
-					$form .= '<td>' . $dataWaznosci . '</td></tr>';
+					$form .= '<td>' . $dataWaznosci . '</td>';
+					$form .= '<td>' . $nazwaApteczki . '</td></tr>';
 			}
 		}
 	}
