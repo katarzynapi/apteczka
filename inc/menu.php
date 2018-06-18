@@ -19,12 +19,11 @@
       <li class="nav-item">
         <a class="nav-link" href="00.php?mn=2"><?php echo $Naglowki[2][1]; ?></a>
       </li>
-      <li class="nav-item">
+      <!--
+	  <li class="nav-item">
         <a class="nav-link" href="00.php?mn=3"><?php echo $Naglowki[3][1]; ?></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="00.php?mn=4"><?php echo $Naglowki[4][1]; ?></a>
-      </li>
+	  -->
       </li>
       <li class="nav-item">
         <a class="nav-link" href="00.php?mn=5"><?php echo $Naglowki[5][1]; ?></a>
@@ -32,11 +31,12 @@
       <li class="nav-item">
         <a class="nav-link" href="00.php?mn=6"><?php echo $Naglowki[6][1]; ?></a>
       </li>
-      <!--
 	  <li class="nav-item">
         <a class="nav-link" href="00.php?mn=7"><?php echo $Naglowki[7][1]; ?></a>
       </li>
-	  -->
+	  <li class="nav-item">
+        <a class="nav-link" href="00.php?mn=4"><?php echo $Naglowki[4][1]; ?></a>
+      </li>
     </ul>
   </div>
 </nav>

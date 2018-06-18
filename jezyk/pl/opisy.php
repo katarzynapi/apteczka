@@ -18,7 +18,7 @@ $Naglowki = array(
 	array(4, "Dokumentacja", "Dokumentacja systemu", ""),
 	array(5, "Leki", "Zarządzanie lekami w apteczce", ""),
 	array(6, "Zarządzanie apteczkami", "Zarządzanie apteczkami", ""),
-	array(7, "Rejestracja użytkownika", "Rejestrowanie do systemu apteczek", ""),
+	array(7, "Raporty", "Raporty dot. funkcjonowania apteczki", ""),
 	array(8, "", "Potwierdzenie rejestracji", "")
 	);
 // Błędy bazy i aplikacji

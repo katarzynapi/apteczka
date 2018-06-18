@@ -27,7 +27,7 @@ else {
 	$kwerenda = "SELECT `id_apteczki` FROM `Dostep` WHERE `id_uzytkownika`='$idUser' ORDER BY `id_apteczki`";
 	$result = Zapytanie($kwerenda);
 	
-	$form = '<br><h5 class="display-4 container">Leki, które wkrótce ulegną przeterminowaniu</h5><br>';
+	$form = '<br><h5 class="display-4 container">Leki przeterminowane bądź takie, które wkrótce ulegną przeterminowaniu</h5><br>';
 		$form .= '<div class="container">';
 		$form .= '<table class="table table-hover"><thead><tr>';
 		$form .= '<th scope="col">Nazwa leku</th>';
@@ -88,10 +88,16 @@ switch($wyborGlowna){
 		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
 	case 2: 
-		$inc = "./inc/rejestracja.php";
-		if(file_exists($inc)) include($inc);
-		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
-		break;
+		if(isset($_SESSION['user'])){
+				echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Już jesteś zalogowany. Rejestracja możliwa tylko dla niezalogowanych użytkowników.</h6></div>";
+				if($_SESSION['Error'] != ""){
+					echo "<br>" . $_SESSION['Error'] . "<br>";
+				}
+		} else {
+			$inc = "./inc/rejestracja.php";
+			if(file_exists($inc)) include($inc);
+			else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
+		}
 		break;
 	default:
 }

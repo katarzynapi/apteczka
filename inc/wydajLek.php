@@ -95,6 +95,7 @@
 				$result = Zapytanie($kwerenda);
 				// update ilosci
 				$ilosc = $ilosc - $wybranaIlosc;
+				echo $ilosc;
 				$kwerenda = "UPDATE `RuchLekow` SET `pozostalo`='$ilosc' WHERE `id`='$idRuchLekow'";
 				$result = Zapytanie($kwerenda);
 				echo "<div class='container'>Lek został wydany.</div>";

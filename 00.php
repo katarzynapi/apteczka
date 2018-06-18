@@ -130,17 +130,10 @@ switch($wybor){
 		break;
 		case 7:
 			$_SESSION['Error'] = "";
-			$_SESSION['Etap'] = "Rejestracja";
-			if(isset($_SESSION['user'])){
-				echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Już jesteś zalogowany. Rejestracja możliwa tylko dla niezalogowanych użytkowników.</h6></div>";
-				if($_SESSION['Error'] != ""){
-					echo "<br>" . $_SESSION['Error'] . "<br>";
-				}
-			} else {
-				$inc = "./inc/rejestracja.php";
-				if(file_exists($inc)) include($inc);
-				else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
-				}
+			$_SESSION['Etap'] = "Raporty";
+			$inc = "./inc/raporty.php";
+			if(file_exists($inc)) include($inc);
+			else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
 		case 8:
 			$_SESSION['Error'] = "";
