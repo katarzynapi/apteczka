@@ -87,6 +87,7 @@ switch($wybor){
 	case 4:
 		$_SESSION['Error'] = "";
 		$_SESSION['Etap'] = "Dokumentacja";
+		echo "<br><a href=\"http://student.agh.edu.pl/~kpi/dokumentacja_apteczki.pdf\">Link do dokumentacji</a>";
 		break;
 	case 5:
 	$_SESSION['Error'] = "";

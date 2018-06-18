@@ -31,7 +31,7 @@ if(isset($_SESSION['wybranaApteczka'])){
 				$table .= '<td>' . $nazwaHandlowa . '</td>';
 				$table .= '<td>' . $opakowanie . '</td>';
 			}
-			echo "idleku: " . $idLeku . "<br>";
+			//echo "idleku: " . $idLeku . "<br>";
 			$kwerenda = "SELECT `id_dokumentu`, `ilosc`, `pozostalo` FROM `RuchLekow` WHERE `id_leku` = '$idLeku'";
 			$result1 = Zapytanie($kwerenda);
 			if($result1->num_rows > 0){
@@ -39,20 +39,20 @@ if(isset($_SESSION['wybranaApteczka'])){
 					$idDokumentu = $row1['id_dokumentu'];
 					$ilosc = $row1['ilosc'];
 					$pozostalo = $row1['pozostalo'];
-					echo "id_dokumentu: " . $idDokumentu . "<br>";
-					echo "ilosc: " . $ilosc . "<br>";
-					echo "pozostalo: " . $pozostalo . "<br>";
+					//echo "id_dokumentu: " . $idDokumentu . "<br>";
+					//echo "ilosc: " . $ilosc . "<br>";
+					//echo "pozostalo: " . $pozostalo . "<br>";
 					if($pozostalo >= 0) $sumaPozostalo = $sumaPozostalo + $pozostalo;
 					if($idDokumentu==1) $sumaIlosci = $sumaIlosci+$ilosc;
 					else if($idDokumentu==2 || $idDokumentu==3) $sumaIlosci = $sumaIlosci-$ilosc;
-					echo "SUMA ILOSCI: " . $sumaIlosci . "<br>";
-					echo "POZOSTAŁO: " . $sumaPozostalo . "<br><br>";
+					//echo "SUMA ILOSCI: " . $sumaIlosci . "<br>";
+					//echo "POZOSTAŁO: " . $sumaPozostalo . "<br><br>";
 				}
 				if($sumaIlosci != $sumaPozostalo) $czyIntegralna = false;
 				$table .= '<td>' . $sumaIlosci . '</td>';
 				$table .= '<td>' . $sumaPozostalo . '</td></tr>';
-				echo "SUMA ILOSCI: " . $sumaIlosci . "<br>";
-				echo "POZOSTAŁO: " . $sumaPozostalo . "<br><br>";
+				//echo "SUMA ILOSCI: " . $sumaIlosci . "<br>";
+				//echo "POZOSTAŁO: " . $sumaPozostalo . "<br><br>";
 			}
 		}
 	}
