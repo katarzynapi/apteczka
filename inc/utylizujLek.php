@@ -84,8 +84,8 @@
 			$IdUser = $result->fetch_object()->id;
 			
 			// dodanie do bazy
-			$kwerenda = "INSERT INTO `kpi`.`RuchLekow` (`id`, `id_apteczki`, `id_uzytkownika`, `id_leku`,  `id_dokumentu`, `ilosc`, `data_waznosci`, `cena`, `data_operacji`, `pozostalo`) " . 
-				"VALUES (NULL, '$idApteczki', '$IdUser', '$idLeku', '3', '$ilosc', '$data_waznosci', '$stracone_pieniadze', '$time', '-1')";
+			$kwerenda = "INSERT INTO `kpi`.`RuchLekow` (`id`, `id_apteczki`, `id_uzytkownika`, `id_leku`, `id_ruchLekow`, `id_dokumentu`, `ilosc`, `data_waznosci`, `cena`, `data_operacji`, `pozostalo`) " . 
+				"VALUES (NULL, '$idApteczki', '$IdUser', '$idLeku', '$idRuchLekow','3', '$ilosc', '$data_waznosci', '$stracone_pieniadze', '$time', '-1')";
 			$result = Zapytanie($kwerenda);
 			// update ilosci
 			$kwerenda = "UPDATE `RuchLekow` SET `pozostalo`='0' WHERE `id`='$idRuchLekow'";

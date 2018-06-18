@@ -91,8 +91,8 @@
 				$idApteczki = $result->fetch_object()->id;
 				
 				// dodanie do bazy
-				$kwerenda = "INSERT INTO `kpi`.`RuchLekow` (`id`, `id_apteczki`, `id_uzytkownika`, `id_leku`,  `id_dokumentu`, `ilosc`, `data_waznosci`, `cena`, `data_operacji`, `pozostalo`) " . 
-					"VALUES (NULL, '$idApteczki', '$IdUser', '$id', '1', '$sztuki', '$datawaznosci', '$cena', '$time', '$sztuki')";
+				$kwerenda = "INSERT INTO `kpi`.`RuchLekow` (`id`, `id_apteczki`, `id_uzytkownika`, `id_leku`, `id_ruchLekow`, `id_dokumentu`, `ilosc`, `data_waznosci`, `cena`, `data_operacji`, `pozostalo`) " . 
+					"VALUES (NULL, '$idApteczki', '$IdUser', '$id','0', '1', '$sztuki', '$datawaznosci', '$cena', '$time', '$sztuki')";
 				$result = Zapytanie($kwerenda);
 				echo "<div class='container'><br>Do bazy dodano następującą pozycję: <br>" . "Nazwa handlowa: " . 
 					$row["NazwaHandlowa"] . "<br>" . "Kod kreskowy: " . $row["KodKreskowy"] . "<br>" . "Postać: " .

@@ -49,7 +49,7 @@ if($_SESSION['Etap'] != "StartLogowania"){
 		<div class="container">
 			<br><h5 class="display-4">Logowanie do systemu</h5><br>
 			<fieldset>
-				<form action="<?php echo $PlikGlowny . "?mn=1&ms=1"; ?>" method = "POST">
+				<form action="<?php echo $PlikGlowny . "?mn=0&ms=1"; ?>" method = "POST">
 					<div class="form-group">
 						<label for="exampleInputEmail1">E-mail lub nazwa użytkownika:</label>
 						<input type="text" name="inpLogName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Wprowadź swój e-mail lub nazwę użytkownika" required>

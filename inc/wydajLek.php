@@ -79,7 +79,7 @@
 			$ilosc = $row['pozostalo'];
 			$idLeku = $row['id_leku'];
 			$data_waznosci = $row['data_waznosci'];
-			$wydane_pieniadze = $row['pozostalo'] / $row['ilosc'] * $row['cena'];
+			$wydane_pieniadze = $wybranaIlosc / $row['ilosc'] * $row['cena'];
 			
 			if($ilosc >= $wybranaIlosc) {
 				date_default_timezone_set("Europe/Warsaw");
@@ -90,8 +90,8 @@
 				$IdUser = $result->fetch_object()->id;
 				
 				// dodanie do bazy
-				$kwerenda = "INSERT INTO `kpi`.`RuchLekow` (`id`, `id_apteczki`, `id_uzytkownika`, `id_leku`,  `id_dokumentu`, `ilosc`, `data_waznosci`, `cena`, `data_operacji`, `pozostalo`) " . 
-					"VALUES (NULL, '$idApteczki', '$IdUser', '$idLeku', '2', '$wybranaIlosc', '$data_waznosci', '$wydane_pieniadze', '$time', '-1')";
+				$kwerenda = "INSERT INTO `kpi`.`RuchLekow` (`id`, `id_apteczki`, `id_uzytkownika`, `id_leku`, `id_ruchLekow`, `id_dokumentu`, `ilosc`, `data_waznosci`, `cena`, `data_operacji`, `pozostalo`) " . 
+					"VALUES (NULL, '$idApteczki', '$IdUser', '$idLeku', '$idRuchLekow', '2', '$wybranaIlosc', '$data_waznosci', '$wydane_pieniadze', '$time', '-1')";
 				$result = Zapytanie($kwerenda);
 				// update ilosci
 				$ilosc = $ilosc - $wybranaIlosc;
