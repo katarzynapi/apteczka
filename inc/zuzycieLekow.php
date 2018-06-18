@@ -12,7 +12,7 @@
 		$result = Zapytanie($kwerenda);
 		if($result->num_rows > 0){
 			$form = '<div class="container" style="max-width:70%">';
-			$form .= '<form action="00.php?mn=5&mm=4" method="post">';
+			$form .= '<form action="00.php?mn=7&mr=0" method="post">';
 			$form .= '<table class="table table-hover"><thead><tr>';
 			$form .= '<th scope="col"></th>';
 			$form .= '<th scope="col">Nazwa użytkownika</th></tr></thead><tbody>';

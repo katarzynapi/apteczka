@@ -71,7 +71,7 @@
 <div class="container">
 	<br><h5 class="display-4">Rejestracja</h5><br>
 
-	<form action="00.php?mn=7" method="post">
+	<form action="00.php?mn=0&ms=2" method="post">
 		<fieldset>
 			<div class="form-group">
 			  <label for="login">Login</label>
@@ -86,7 +86,7 @@
 			  <input type="password" class="form-control" id="haslo" name="haslo" placeholder="Wpisz hasło">
 			</div>
 			<div class="form-group">
-			  <label for="potwierdzHaslo">Hasło</label>
+			  <label for="potwierdzHaslo">Potwierdź hasło</label>
 			  <input type="password" class="form-control" id="potwierdzHaslo" name="potwierdzHaslo" placeholder="Potwierdź hasło">
 			</div>
 			<input type="submit" class="btn btn-primary" name="dalej" value="Dalej">

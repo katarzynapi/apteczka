@@ -42,7 +42,7 @@ switch($wybor){
 		break;
 	case 0:
 		$_SESSION['Error'] = "";
-		$_SESSION['Etap'] = "StartLogowania";
+		$_SESSION['Etap'] = "Glowna";
 		//Formularz logowania
 		$inc = "./inc/glowna.php";
 		if(file_exists($inc)) include($inc);
@@ -87,18 +87,6 @@ switch($wybor){
 	case 4:
 		$_SESSION['Error'] = "";
 		$_SESSION['Etap'] = "Dokumentacja";
-		if(!isset($_SESSION['user'])){
-			echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
-			if($_SESSION['Error'] != ""){
-				echo "<br>" . $_SESSION['Error'] . "<br>";
-		}
-		} else {
-			$user = $_SESSION['user'];
-			$kwerenda = "SELECT id FROM test_users WHERE email = '$user'";
-			$result = Zapytanie($kwerenda);
-			$zBazyId = $result->fetch_object()->id;
-			echo "zBazyId: " . $zBazyId . " ";
-		}
 		break;
 	case 5:
 	$_SESSION['Error'] = "";
@@ -131,9 +119,16 @@ switch($wybor){
 		case 7:
 			$_SESSION['Error'] = "";
 			$_SESSION['Etap'] = "Raporty";
-			$inc = "./inc/raporty.php";
-			if(file_exists($inc)) include($inc);
-			else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
+			if(!isset($_SESSION['user'])){
+				echo "<div class=\"container\"><h6 style=\"margin-top: 30px\">Zaloguj się, żeby uzyskać dostęp.</h6></div>";
+				if($_SESSION['Error'] != ""){
+					echo "<br>" . $_SESSION['Error'] . "<br>";
+				}
+			} else {
+				$inc = "./inc/raporty.php";
+				if(file_exists($inc)) include($inc);
+				else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
+			}
 		break;
 		case 8:
 			$_SESSION['Error'] = "";
