@@ -18,6 +18,7 @@ if(!isset($_SESSION['user']))
 <?php 
 } 
 else {
+	date_default_timezone_set('europe/warsaw');
 	$dataMiesiacPo = date_create("+1 month")->format('Y-m-d');
 	$emailUser = $_SESSION['user'];
 	$kwerenda = "SELECT id FROM test_users WHERE email = '$emailUser'";
