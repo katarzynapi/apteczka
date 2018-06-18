@@ -67,9 +67,9 @@
 					$idLeku = $_POST['lek'];
 					$wybranaData = $_POST['data'];
 					$idUzytkownika = $_POST['uzytkownik'];
-					echo "idleku" . $idLeku . "<br>";
-					echo "wybrana data" . $wybranaData . "<br>";
-					echo "idUzytkownika" . $idUzytkownika . "<br>";
+					//echo "idleku" . $idLeku . "<br>";
+					//echo "wybrana data" . $wybranaData . "<br>";
+					//echo "idUzytkownika" . $idUzytkownika . "<br>";
 					$kwerenda = "SELECT `data_operacji`, `ilosc` FROM `RuchLekow` WHERE `id_leku` = '$idLeku' AND `id_apteczki` = '$idApteczki' AND `id_uzytkownika` = '$idUzytkownika' AND `id_dokumentu`='2'";
 					$result1 = Zapytanie($kwerenda);
 					if($result1->num_rows > 0){

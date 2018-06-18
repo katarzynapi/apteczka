@@ -2,8 +2,8 @@
 // Łączenie z bazą
 function PolaczBaza(){
 	// Dane do połączenia - najlepiej dołączyć z pliku powyżej public_html
-	//$pliktxt = "./../../dane.txt";
-	$pliktxt = "./../../Documents/dane.txt";
+	$pliktxt = "./../../dane.txt";
+	//$pliktxt = "./../../Documents/dane.txt";
 	//$pliktxt = "./dane.txt";
 	if(file_exists($pliktxt)){
 		$fp = fopen($pliktxt, "r");

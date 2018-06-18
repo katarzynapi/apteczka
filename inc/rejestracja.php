@@ -46,11 +46,11 @@
 					$message = "
 						Potwierdź swój adres e-mail.
 						Kliknij link poniżej, aby dokończyć rejestrację:
-						http://localhost/~Kasia/apteczka/00.php?mn=8&login=$login&code=$confirm_code
+						http://student.agh.edu.pl/~kpi/apteczka/00.php?mn=8&login=$login&code=$confirm_code
 						
 						Nie odpowiadaj na ten e-mail.
 					";
-					//mail("$email","Apteczka - potwierdzenie rejestracji","$message","From: noreply@apteczka.com");
+					mail("$email","Apteczka - potwierdzenie rejestracji","$message","From: noreply@apteczka.com");
 					array_push($text,'Sprawdź skrzynkę mailową i kliknij w link, aby zakończyć rejestrację.');
 				}
 				else echo "Nie dodano do bazy";
