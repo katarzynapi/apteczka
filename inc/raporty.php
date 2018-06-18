@@ -26,9 +26,9 @@ if(isset($_GET['mr'])){
  date_default_timezone_set("Europe/Warsaw");
  switch($wyborRaporty){
 	case 0:
-	$inc = "./inc/zuzycieLekow.php";
-	if(file_exists($inc)) include($inc);
-	else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
+		$inc = "./inc/zuzycieLekow.php";
+		if(file_exists($inc)) include($inc);
+		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
 	case 1:
 		$inc = "./inc/historiaLeku.php";
@@ -41,6 +41,9 @@ if(isset($_GET['mr'])){
 		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
 	case 3:
+		$inc = "./inc/przychody_rozchody.php";
+		if(file_exists($inc)) include($inc);
+		else header("Location: app_error.php?tx_err=$BladIntegralnosciAplikacji&gdzie=$inc");
 		break;
 	case 4:
 		// badanie integralności bazy
